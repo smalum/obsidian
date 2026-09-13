@@ -1,0 +1,10 @@
+{
+  "id": "smalum",
+  "name": "Smalum",
+  "version": "0.2.5",
+  "minAppVersion": "1.5.0",
+  "description": "Render Smalum diagram fences (sm / smalum) with canvas glyphs (DFD, BPMN, C4).",
+  "author": "Smalum",
+  "authorUrl": "https://smalum.io",
+  "isDesktopOnly": false
+}

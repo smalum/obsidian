@@ -1,0 +1,56 @@
+/* Токены как в VS Code preview: бумага = фон заметки, не белый лист. */
+.smalum-preview {
+  --smalum-paper: transparent;
+  --smalum-node-bg: #fff;
+  --smalum-stroke: #2c3e50;
+  --smalum-text: #2c3e50;
+  --smalum-error-bg: #fef2f2;
+  --smalum-error-text: #991b1b;
+  position: relative;
+  margin: 0.5em 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: transparent;
+  overflow: auto;
+}
+
+.theme-dark .smalum-preview {
+  --smalum-node-bg: #1c2734;
+  --smalum-stroke: #c5d0da;
+  --smalum-text: #e8eef4;
+  --smalum-error-bg: #3a1c18;
+  --smalum-error-text: #ffc9c2;
+}
+
+.smalum-preview > svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+.smalum-preview__error {
+  padding: 0.75em 1em;
+  color: var(--smalum-error-text, var(--text-error));
+  background: var(--smalum-error-bg, transparent);
+  font-size: 0.9em;
+}
+
+.smalum-preview__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0.4em 0.75em;
+  border-top: 1px solid var(--background-modifier-border);
+  background: transparent;
+}
+
+.smalum-preview__open,
+.smalum-preview__copy {
+  font-size: 0.8em;
+}
+
+.smalum-preview__copy {
+  cursor: pointer;
+}
