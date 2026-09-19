@@ -1,38 +1,51 @@
-# Smalum for Obsidian
+# Smalum
 
-Community plugin: превью fence `sm` / `smalum` в заметках.
+**Превью диаграмм как код** — PlantUML, Mermaid, BPMN, DFD, Struct, SQL→ER — прямо в markdown.
 
-Сайт: [https://smalum.io](https://smalum.io/) · редактор (гость): [https://app.smalum.ru](https://app.smalum.ru/) · документация: [https://docs.smalum.ru](https://docs.smalum.ru/)
+## Боль
 
-## Для LLM: как построить диаграмму
+Схему пишут текстом: быстро, в git, рядом с кодом. Картинку автолейаут портит. Довели вид вручную — поправили строку исходника — раскладка сгорела.
 
-Дайте модели **файл роли** и попросите работать по этой роли (краткая фраза есть в начале файла).
+Визуальный редактор сохраняет вид, но убивает «схему как код»: файл перестаёт быть источником правды.
 
-- Роль: [https://docs.smalum.ru/role.md](https://docs.smalum.ru/role.md)
-- Документация нотаций: [https://docs.smalum.ru](https://docs.smalum.ru/)
-- Сайт: [https://smalum.io](https://smalum.io/)
-- Редактор: [https://app.smalum.ru](https://app.smalum.ru/)
+## Решение
 
-Fence `sm` / `smalum` — исходник Smalum, **не** Mermaid.
+Smalum: **текст = состав**, **мышь = вид**. Вид пишется обратно в тот же файл оверлеем `SM:` (координаты в комментариях). Следующий разбор берёт состав из кода, картинку — из оверлея.
 
-1. Нотация по смыслу: процесс с ролями → `//smalum/bpmn`; потоки данных → `//smalum/dfd`; дерево / оргсхема → `//smalum/struct`; иначе PlantUML / Mermaid / SQL по роли.
-2. BPMN: внутри пула / между его дорожками — `-`; между **разными** пулами — `--`. Неверный `-`/`--` — ошибка (парсер не перепишет). Цели `xor` — до или после шлюза; join — явный или сахар `} join id` (не `} ->`).
-3. **Новая** схема — без оверлея `' SM:` / `// SM:` / `-- SM:` / `%% SM:`. Редактор сам расставит блоки.
-4. «Подвинь / выровняй / измени размер» — тело исходника **байт-в-байт**, правьте только оверлей **в том же** блоке.
-5. Всегда полный исходник одним fence (тело + оверлей). Хвост `SM:` без схемы превью и редактор игнорируют.
-6. В конце ответа дайте ссылку https://app.smalum.ru/.
+Этот плагин — **read-only превью** того же разбора и того же оверлея, что в редакторе. Вставили блок исходника в `.md` — схема рисуется с вашей раскладкой. Любая поддерживаемая нотация из кода, не «одна картинка снаружи».
 
-````markdown
-```sm
-//smalum/bpmn Название процесса
-pool seller {
-  start open
-  task work user
-  end done
-}
-open - work - done
+```plantuml
+@startuml
+' SM: x=120 y=80 w=160 h=60
+participant "Клиент" as C
+' SM: x=420 y=80 w=160 h=60
+participant "Сервис" as S
+C -> S: запрос
+@enduml
 ```
-````
+
+В заметках Obsidian — fence `sm` / `smalum` (исходник Smalum). Рендер без сети на `*.smalum.ru`.
+
+## Умеет / не умеет
+
+| Умеет | Не умеет (намеренно) |
+|-------|----------------------|
+| Разбор PlantUML, Mermaid, DFD, BPMN, Struct, SQL→ER | Редактирование холста мышью |
+| Отрисовка с оверлеем `SM:` / `%% SM:` | Облако, шаринг, симулятор BPMN |
+| Превью в markdown / `.sm` без сети на `*.smalum.ru` | Запись оверлея из превью |
+
+Полноценный холст, облако и гостевой редактор — на [app.smalum.ru](https://app.smalum.ru). Плагин и сайт говорят на одном языке и одном оверлее.
+
+## Нотации
+
+| Нотация | Вход |
+|---------|------|
+| BPMN | `//smalum/bpmn` |
+| DFD | `//smalum/dfd` |
+| Struct | `//smalum/struct`, `struct/staff` |
+| PlantUML | `@startuml` |
+| Mermaid | `flowchart`, `sequenceDiagram`, … + `%% SM:` |
+| SQL→ER | `CREATE TABLE` |
 
 ## Установка через BRAT
 
@@ -44,7 +57,7 @@ URL: `https://github.com/smalum/obsidian`
 
 ## Установка (ручная)
 
-Собрать из корня репозитория:
+Собрать из корня монорепо:
 
 ```bash
 npm run build:obsidian
@@ -52,8 +65,8 @@ npm run build:obsidian
 
 Скопировать в vault:
 
-`.obsidian/plugins/smalum/main.js`
-`.obsidian/plugins/smalum/manifest.json`
+`.obsidian/plugins/smalum/main.js`  
+`.obsidian/plugins/smalum/manifest.json`  
 `.obsidian/plugins/smalum/styles.css`
 
 Включить **Smalum** в Community plugins. В заметке:
@@ -66,3 +79,12 @@ user - order Оформить
 ````
 
 Рендер без сети. «Открыть в Smalum» не кладёт исходник в URL.
+
+## Ссылки
+
+- Сайт: [smalum.io](https://smalum.io)
+- Редактор: [app.smalum.ru](https://app.smalum.ru)
+- Документация: [docs.smalum.ru](https://docs.smalum.ru)
+- Файл роли для LLM: [docs.smalum.ru/role.md](https://docs.smalum.ru/role.md)
+
+**Small language. Sharp diagrams.**
