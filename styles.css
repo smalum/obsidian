@@ -1,6 +1,7 @@
 /* Токены как в VS Code preview: бумага = фон заметки, не белый лист. */
 .smalum-preview {
   --smalum-paper: transparent;
+  --smalum-c4-frame-fill: #e8f3fa;
   --smalum-node-bg: #fff;
   --smalum-stroke: #2c3e50;
   --smalum-text: #2c3e50;
@@ -15,6 +16,8 @@
 }
 
 .theme-dark .smalum-preview {
+  /* BUG-994: C4 boundary / Deployment_Node / DFD group fill (as VS Code preview.css). */
+  --smalum-c4-frame-fill: #1a3040;
   --smalum-node-bg: #1c2734;
   --smalum-stroke: #c5d0da;
   --smalum-text: #e8eef4;
