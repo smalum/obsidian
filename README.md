@@ -1,6 +1,6 @@
 # Smalum
 
-**Превью диаграмм как код** — PlantUML, Mermaid, BPMN, DFD, Struct, SQL→ER — прямо в markdown.
+**Превью диаграмм как код** — PlantUML, Mermaid, BPMN, DFD, Struct, Infra, SQL→ER — прямо в markdown.
 
 ## Боль
 
@@ -24,17 +24,17 @@ C -> S: запрос
 @enduml
 ```
 
-В заметках Obsidian — fence `sm` / `smalum` (исходник Smalum). Рендер без сети на `*.smalum.ru`.
+В заметках Obsidian — fence `sm` / `smalum` (исходник Smalum). Рендер без сети к `*.smalum.io`.
 
 ## Умеет / не умеет
 
 | Умеет | Не умеет (намеренно) |
 |-------|----------------------|
-| Разбор PlantUML, Mermaid, DFD, BPMN, Struct, SQL→ER | Редактирование холста мышью |
+| Разбор PlantUML, Mermaid, DFD, BPMN, Struct, Infra, SQL→ER | Редактирование холста мышью |
 | Отрисовка с оверлеем `SM:` / `%% SM:` | Облако, шаринг, симулятор BPMN |
-| Превью в markdown / `.sm` без сети на `*.smalum.ru` | Запись оверлея из превью |
+| Превью в markdown / `.sm` без сети к `*.smalum.io` | Запись оверлея из превью |
 
-Полноценный холст, облако и гостевой редактор — на [app.smalum.ru](https://app.smalum.ru). Плагин и сайт говорят на одном языке и одном оверлее.
+Полноценный холст, облако и гостевой редактор — на [app.smalum.io](https://app.smalum.io). Плагин и сайт говорят на одном языке и одном оверлее.
 
 ## Нотации
 
@@ -43,6 +43,7 @@ C -> S: запрос
 | BPMN | `//smalum/bpmn` |
 | DFD | `//smalum/dfd` |
 | Struct | `//smalum/struct`, `struct/staff` |
+| Infra | `//smalum/infra`, `infra/flow`, `infra/l2`, `infra/l3` |
 | PlantUML | `@startuml` |
 | Mermaid | `flowchart`, `sequenceDiagram`, … + `%% SM:` |
 | SQL→ER | `CREATE TABLE` |
@@ -83,8 +84,8 @@ user - order Оформить
 ## Ссылки
 
 - Сайт: [smalum.io](https://smalum.io)
-- Редактор: [app.smalum.ru](https://app.smalum.ru)
-- Документация: [docs.smalum.ru](https://docs.smalum.ru)
-- Файл роли для LLM: [docs.smalum.ru/role.md](https://docs.smalum.ru/role.md)
+- Редактор: [app.smalum.io](https://app.smalum.io)
+- Документация: [docs.smalum.io](https://docs.smalum.io)
+- Файл роли для LLM: [docs.smalum.io/role.md](https://docs.smalum.io/role.md)
 
 **Small language. Sharp diagrams.**
