@@ -1,45 +1,47 @@
 # Smalum
 
-**Превью диаграмм как код** — PlantUML, Mermaid, BPMN, DFD, Struct, Infra, SQL→ER — прямо в markdown.
+> Русская версия: [README.ru.md](./README.ru.md)
 
-## Боль
+**Diagram-as-code preview** — PlantUML, Mermaid, BPMN, DFD, Infra, IDEF, Struct, SQL→ER — right in markdown.
 
-Схему пишут текстом: быстро, в git, рядом с кодом. Картинку автолейаут портит. Довели вид вручную — поправили строку исходника — раскладка сгорела.
+## The problem
 
-Визуальный редактор сохраняет вид, но убивает «схему как код»: файл перестаёт быть источником правды.
+You write the diagram as text: fast, in git, next to the code. Auto-layout ruins the picture. You fix the layout by hand — then change one source line — and the layout is gone.
 
-## Решение
+A visual editor keeps the layout but kills “diagram as code”: the file stops being the source of truth.
 
-Smalum: **текст = состав**, **мышь = вид**. Вид пишется обратно в тот же файл оверлеем `SM:` (координаты в комментариях). Следующий разбор берёт состав из кода, картинку — из оверлея.
+## The solution
 
-Этот плагин — **read-only превью** того же разбора и того же оверлея, что в редакторе. Вставили блок исходника в `.md` — схема рисуется с вашей раскладкой. Любая поддерживаемая нотация из кода, не «одна картинка снаружи».
+Smalum: **text = structure**, **mouse = layout**. Layout is written back into the same file as an `SM:` overlay (coordinates in comments). The next parse takes structure from the code and the picture from the overlay.
+
+This plugin is a **read-only preview** of the same parse and the same overlay as the editor. Drop a source fence into a note — the diagram renders with your layout. Any supported notation from code, not “one external image”.
 
 ```plantuml
 @startuml
 ' SM: x=120 y=80 w=160 h=60
-participant "Клиент" as C
+participant "Client" as C
 ' SM: x=420 y=80 w=160 h=60
-participant "Сервис" as S
-C -> S: запрос
+participant "Service" as S
+C -> S: request
 @enduml
 ```
 
-В заметках Obsidian — fence `sm` / `smalum` (исходник Smalum). Рендер без сети к `*.smalum.io`.
+In Obsidian notes use the `sm` / `smalum` fence (Smalum source). Render needs no network to `*.smalum.io`.
 
-## Умеет / не умеет
+## Does / does not
 
-| Умеет | Не умеет (намеренно) |
-|-------|----------------------|
-| Разбор PlantUML, Mermaid, DFD, BPMN, Struct, Infra, SQL→ER | Редактирование холста мышью |
-| Отрисовка с оверлеем `SM:` / `%% SM:` | Облако, шаринг, симулятор BPMN |
-| Превью в markdown / `.sm` без сети к `*.smalum.io` | Запись оверлея из превью |
+| Does | Does not (on purpose) |
+|------|------------------------|
+| Parse PlantUML, Mermaid, DFD, BPMN, Struct, Infra, SQL→ER | Edit the canvas with the mouse |
+| Render with `SM:` / `%% SM:` overlay | Cloud, sharing, BPMN token simulator |
+| Preview in markdown / `.sm` with no network to `*.smalum.io` | Write overlay from the preview |
 
-Полноценный холст, облако и гостевой редактор — на [app.smalum.io](https://app.smalum.io). Плагин и сайт говорят на одном языке и одном оверлее.
+Full canvas, cloud, and guest editor live on [app.smalum.io](https://app.smalum.io). The plugin and the site speak the same language and the same overlay.
 
-## Нотации
+## Notations
 
-| Нотация | Вход |
-|---------|------|
+| Notation | Input |
+|----------|-------|
 | BPMN | `//smalum/bpmn` |
 | DFD | `//smalum/dfd` |
 | Struct | `//smalum/struct`, `struct/staff` |
@@ -48,44 +50,44 @@ C -> S: запрос
 | Mermaid | `flowchart`, `sequenceDiagram`, … + `%% SM:` |
 | SQL→ER | `CREATE TABLE` |
 
-## Установка через BRAT
+## Install via BRAT
 
 URL: `https://github.com/smalum/obsidian`
 
-Если BRAT пишет **GitHub API rate limit exceeded** — это лимит анонимного GitHub API (~60/час), не ошибка плагина. Подождите сброса **или** вставьте classic PAT со scope `public_repo` в Settings → BRAT (или в поле токена диалога Add plugin).
+If BRAT reports **GitHub API rate limit exceeded**, that is the anonymous GitHub API limit (~60/hour), not a plugin bug. Wait for the reset **or** paste a classic PAT with `public_repo` into Settings → BRAT (or the token field in the Add plugin dialog).
 
-Тег релиза должен совпадать с `version` в `manifest.json` (без префикса `v`). Превью без белой бумаги: фон заметки, токены как в VS Code. C4-заливки (person / container / ext) **не** инвертируются с темой.
+The release tag must match `version` in `manifest.json` (no `v` prefix). Preview without white paper: note background, tokens as in VS Code. C4 fills (person / container / ext) are **not** inverted with the theme.
 
-## Установка (ручная)
+## Install (manual)
 
-Собрать из корня монорепо:
+Build from the monorepo root:
 
 ```bash
 npm run build:obsidian
 ```
 
-Скопировать в vault:
+Copy into the vault:
 
 `.obsidian/plugins/smalum/main.js`  
 `.obsidian/plugins/smalum/manifest.json`  
 `.obsidian/plugins/smalum/styles.css`
 
-Включить **Smalum** в Community plugins. В заметке:
+Enable **Smalum** under Community plugins. In a note:
 
 ````markdown
 ```sm
-//smalum/dfd Пример
-user - order Оформить
+//smalum/dfd Example
+user - order Place order
 ```
 ````
 
-Рендер без сети. «Открыть в Smalum» не кладёт исходник в URL.
+Offline render. “Open in Smalum” does not put the source into the URL.
 
-## Ссылки
+## Links
 
-- Сайт: [smalum.io](https://smalum.io)
-- Редактор: [app.smalum.io](https://app.smalum.io)
-- Документация: [docs.smalum.io](https://docs.smalum.io)
-- Файл роли для LLM: [docs.smalum.io/role.md](https://docs.smalum.io/role.md)
+- Site: [smalum.io](https://smalum.io)
+- Editor: [app.smalum.io](https://app.smalum.io)
+- Docs: [docs.smalum.io](https://docs.smalum.io)
+- LLM role file: [docs.smalum.io/role.md](https://docs.smalum.io/role.md)
 
 **Small language. Sharp diagrams.**
