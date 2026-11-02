@@ -91,3 +91,5 @@ Offline render. “Open in Smalum” does not put the source into the URL.
 - LLM role file: [docs.smalum.io/role.md](https://docs.smalum.io/role.md)
 
 **Small language. Sharp diagrams.**
+
+Note: the Smalum web editor interface is in Russian; English UI is planned.

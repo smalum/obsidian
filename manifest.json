@@ -1,9 +1,9 @@
 {
   "id": "smalum",
   "name": "Smalum",
-  "version": "0.2.12",
+  "version": "0.2.14",
   "minAppVersion": "1.5.0",
-  "description": "Render Smalum diagram fences (sm / smalum) with canvas glyphs (DFD, BPMN, C4).",
+  "description": "Render Smalum diagram fences (sm / smalum) with canvas glyphs (DFD, BPMN, C4). Note: the Smalum web editor interface is in Russian; English UI is planned.",
   "author": "Smalum",
   "authorUrl": "https://smalum.io",
   "isDesktopOnly": false

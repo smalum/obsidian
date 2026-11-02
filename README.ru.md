@@ -92,3 +92,5 @@ user - order Оформить
 - Файл роли для LLM: [docs.smalum.io/role.md](https://docs.smalum.io/role.md)
 
 **Small language. Sharp diagrams.**
+
+Обратите внимание: интерфейс веб-редактора Smalum на русском; английский — в планах.
