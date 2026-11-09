@@ -52,8 +52,14 @@
 }
 
 .smalum-preview__open,
+.smalum-preview__alt,
 .smalum-preview__copy {
   font-size: 0.8em;
+}
+
+.smalum-preview__alt {
+  font-size: 0.72em;
+  opacity: 0.85;
 }
 
 .smalum-preview__copy {
